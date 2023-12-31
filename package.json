@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node category-seeds.js && node product-seeds.js && node product-tag-seeds.js && node tag-seeds.js",
+    "test": "npm run seed"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Project Description
-This project features an E-Commerce site that utilizes an Express API and incorporates the use of a MySQL database and Sequelize models to create a capable server.
+This project features an e-commerce retail site that utilizes an Express API and incorporates the use of a MySQL database and Sequelize models to create a capable server that is competitive with other e-commerce sites.
 
 ## Table of Contents
 - [Usage](#usage)

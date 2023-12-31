@@ -8,7 +8,16 @@ const { Tag, Product, ProductTag } = require('./../../models');
 router.get('/', async (req, res) => {
   try {
     const tags = await Tag.findAll({
-      include: Product,
+      include: [
+        {
+          model: ProductTag,
+          attributes: [],
+          include: {
+            model: Product,
+            attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+          },
+        },
+      ],
     });
     res.status(200).json(tags);
   } catch (err) {
@@ -24,11 +33,11 @@ router.get('/:id', async (req, res) => {
       include: Product,
     });
 
-  if (!tag) {
-    res.status(404).json({ message: 'Tag not found' });
-    return;
-  }
-  res.status(200).json(tag);
+    if (!tag) {
+      res.status(404).json({ message: 'Tag not found' });
+      return;
+    }
+    res.status(200).json(tag);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -55,11 +64,11 @@ router.put('/:id', async (req, res) => {
     });
 
     if (updatedTag[0] === 0) {
-      res.status(404).json({ message: 'Tag not found'});
+      res.status(404).json({ message: 'Tag not found' });
       return;
     }
 
-    res.status(200).json({ message: 'Category updated successfully'});
+    res.status(200).json({ message: 'Tag updated successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
@@ -76,11 +85,11 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (deletedTag === 0) {
-      res.status(404).json({ message: 'Tag not found'});
+      res.status(404).json({ message: 'Tag not found' });
       return;
     }
 
-    res.status(202).json({ message: 'Tag deleted successfully'});
+    res.status(202).json({ message: 'Tag deleted successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
