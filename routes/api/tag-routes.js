@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('./../../models');
+const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -8,17 +8,11 @@ const { Tag, Product, ProductTag } = require('./../../models');
 router.get('/', async (req, res) => {
   try {
     const tags = await Tag.findAll({
-      include: [
-        {
-          model: ProductTag,
-          attributes: [],
-          include: {
-            model: Product,
-            attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
-          },
-        },
-      ],
-    });
+      include: [Product,
+      {
+        model: Product, through: ProductTag,
+      }]
+    })
     res.status(200).json(tags);
   } catch (err) {
     res.status(500).json(err);

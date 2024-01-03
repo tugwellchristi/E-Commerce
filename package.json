@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node server.js",
-    "seed": "node category-seeds.js && node product-seeds.js && node product-tag-seeds.js && node tag-seeds.js",
+    "seed": "node seeds/index.js",
     "test": "npm run seed"
   },
   "dependencies": {
